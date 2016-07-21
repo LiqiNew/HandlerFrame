@@ -3,7 +3,7 @@ package com.liqi.eventbushandler.base;
 import com.liqi.eventbushandler.base.BaseHandler.BaseHandlerGetKey;
 
 /**
- * BaseHandler操作对象
+ * BaseHandler操作对象（核心）
  * 
  * @author Liqi
  * 
