@@ -7,7 +7,7 @@ import android.os.Message;
 import android.util.SparseArray;
 
 /**
- * 用集合存储软引用调用的handler(核心类)
+ * 用集合存储软引用调用的handler(核心)
  * 
  * @author Liqi
  * 
@@ -82,7 +82,7 @@ public class BaseHandler extends Handler implements BaseHandlerMethod {
 	}
 
 	/**
-	 * 清除SparseArray集合中指定键的弱引用的数据 (!--Key是通过接口获取的，只需要调用此方法即可)
+	 * 清除SparseArray集合中指定键的软引用的数据 (!--Key是通过接口获取的，只需要调用此方法即可)
 	 */
 	@Override
 	public void removeKeyData() {
