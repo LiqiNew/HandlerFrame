@@ -3,7 +3,7 @@ package com.liqi.eventbushandler.base;
 import android.os.Message;
 
 /**
- * handler回调更新接口
+ * handler回调更新接口（核心）
  * 
  * @author Liqi
  * 
