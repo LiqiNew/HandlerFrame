@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical" >
+
+    <Button
+        android:id="@+id/test_button01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="跨页面发送信息给TestMainActivity"
+        android:textColor="@android:color/black"
+        android:textSize="15sp" />
+
+    <Button
+        android:id="@+id/test_button02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="跨页面发送信息给TestOneActivity"
+        android:textColor="@android:color/black"
+        android:textSize="15sp" />
+
+</LinearLayout>
