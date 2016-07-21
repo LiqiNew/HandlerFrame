@@ -3,7 +3,7 @@ package com.liqi.eventbushandler.base;
 import com.liqi.eventbushandler.base.BaseHandler.BaseHandlerGetKey;
 
 /**
- * BaseHandler调用方法接口
+ * BaseHandler调用方法接口（核心）
  * 
  * @author Liqi
  * 
@@ -25,7 +25,7 @@ public interface BaseHandlerMethod {
 	public void putMessage(int tag, Object obj);
 
 	/**
-	 * 清除SparseArray集合中指定键的弱引用的数据 (!--Key是通过接口获取的，只需要调用此方法即可)
+	 * 清除SparseArray集合中指定键的软弱引用的数据 (!--Key是通过接口获取的，只需要调用此方法即可)
 	 */
 	public void removeKeyData();
 
