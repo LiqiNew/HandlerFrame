@@ -11,10 +11,6 @@ import android.widget.TextView;
 import com.liqi.eventbushandler.R;
 
 public class TestMainActivity extends BaseActivity implements OnClickListener {
-	/**
-	 * 当前对象的存储BaseHandler里面的key
-	 */
-	public static final int MAINACTIVITY_KEY = 0x11;
 
 	/**
 	 * message中的what标签
@@ -46,7 +42,7 @@ public class TestMainActivity extends BaseActivity implements OnClickListener {
 		test_button01.setOnClickListener(this);
 		test_textview01 = (TextView) findViewById(R.id.test_textview01);
 		test_textview02 = (TextView) findViewById(R.id.test_textview02);
-		handler.addKeyHandler(MAINACTIVITY_KEY,this);
+		handler.addKeyHandler(TestMainActivity.class,this);
 	}
 
 	@Override

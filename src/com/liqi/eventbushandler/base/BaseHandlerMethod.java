@@ -1,6 +1,6 @@
-package com.liqi.eventbushandler.base;
+package com.liqi.eventbushandler.handler;
 
-import com.liqi.eventbushandler.base.BaseHandler.BaseHandlerGetKey;
+import com.liqi.eventbushandler.handler.BaseHandler.BaseHandlerGetKey;
 
 /**
  * BaseHandler调用方法接口（核心）

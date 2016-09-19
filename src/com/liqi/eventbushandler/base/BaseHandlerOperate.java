@@ -1,6 +1,6 @@
-package com.liqi.eventbushandler.base;
+package com.liqi.eventbushandler.handler;
 
-import com.liqi.eventbushandler.base.BaseHandler.BaseHandlerGetKey;
+import com.liqi.eventbushandler.handler.BaseHandler.BaseHandlerGetKey;
 
 /**
  * BaseHandler操作对象（核心）
@@ -8,20 +8,22 @@ import com.liqi.eventbushandler.base.BaseHandler.BaseHandlerGetKey;
  * @author Liqi
  * 
  */
-public class BaseHandlerOperate implements BaseHandlerGetKey {
-	// handler往集合里面增加对象的key
-	protected int handlerKey;
+public class BaseHandlerOperate implements BaseHandlerGetKey,
+		FactoryOperateInterface {
+	// 当前操作的对象class
+	protected Class<?> clazz;
 	private BaseHandlerMethod handler;
 	private static BaseHandlerOperate handlerOperate;
+	private BaseHandlerFactoryId factoryId;
 
 	/**
 	 * 获取hBaseHandler操作对象
 	 * 
 	 * @return
 	 */
-	public static BaseHandlerOperate getBaseHandlerOperate() {
+	public synchronized static BaseHandlerOperate getBaseHandlerOperate() {
 		synchronized (BaseHandlerOperate.class.getName()) {
-			if (handlerOperate == null) {
+			if (null == handlerOperate) {
 				handlerOperate = new BaseHandlerOperate();
 			}
 		}
@@ -31,17 +33,21 @@ public class BaseHandlerOperate implements BaseHandlerGetKey {
 	private BaseHandlerOperate() {
 		handler = BaseHandler.getBaseHandler();
 		handler.setBaseHandlerGetKey(this);
+		factoryId = BaseHandlerFactoryId.getBaseHandlerFactoryId();
 	}
 
 	/**
 	 * 把当前对象对象添加到指定键里面
 	 * 
 	 * @param handlerKey
-	 *            BaseHandler-存储对象的Key
+	 *            BaseHandler-要存储对象的calss
 	 */
-	public BaseHandlerOperate addKeyHandler(int handlerKey, BaseHandlerUpDate handlerUpDate) {
-		this.handlerKey = handlerKey;
-		handler.addSparseArray(handlerUpDate);
+	public BaseHandlerOperate addKeyHandler(Class<?> clazz,
+			BaseHandlerUpDate handlerUpDate) {
+		if (null != clazz) {
+			this.clazz = clazz;
+			handler.addSparseArray(handlerUpDate);
+		}
 		return this;
 	}
 
@@ -49,15 +55,17 @@ public class BaseHandlerOperate implements BaseHandlerGetKey {
 	 * 给指定的handler发送message
 	 * 
 	 * @param handlerKey
-	 *            BaseHandler-取出对象的Key
+	 *            BaseHandler-取出对象的class
 	 * @param tag
 	 *            Message标识
 	 * @param obj
 	 *            MessageObj数据源
 	 */
-	public BaseHandlerOperate putMessageKey(int handlerKey, int tag, Object obj) {
-		this.handlerKey = handlerKey;
-		handler.putMessage(tag, obj);
+	public BaseHandlerOperate putMessageKey(Class<?> clazz, int tag, Object obj) {
+		if (null != clazz) {
+			this.clazz = clazz;
+			handler.putMessage(tag, obj);
+		}
 		return this;
 	}
 
@@ -65,11 +73,13 @@ public class BaseHandlerOperate implements BaseHandlerGetKey {
 	 * 移除BaseHandler里面的指定key对象
 	 * 
 	 * @param handlerKey
-	 *            BaseHandler-取出对象的Key
+	 *            BaseHandler-移除对象的class
 	 */
-	public BaseHandlerOperate removeKeyData(int handlerKey) {
-		this.handlerKey = handlerKey;
-		handler.removeKeyData();
+	public BaseHandlerOperate removeKeyData(Class<?> clazz) {
+		if (null != clazz) {
+			this.clazz = clazz;
+			handler.removeKeyData();
+		}
 		return this;
 	}
 
@@ -87,6 +97,16 @@ public class BaseHandlerOperate implements BaseHandlerGetKey {
 
 	@Override
 	public int handlerGetKey() {
-		return handlerKey;
+		return factoryId.getFactoryId(clazz);
+	}
+
+	@Override
+	public void removeFactoryKeyData() {
+		factoryId.removeKeyData(clazz);
+	}
+
+	@Override
+	public void removeAllFactoryData() {
+		factoryId.removeAll();
 	}
 }

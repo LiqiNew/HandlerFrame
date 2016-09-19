@@ -11,8 +11,6 @@ import android.widget.TextView;
 import com.liqi.eventbushandler.R;
 
 public class TestOneActivity extends BaseActivity implements OnClickListener {
-	// 当前对象的存储BaseHandler里面的key
-	public static final int ONEACTIVITY_KEY = 0x22;
 	// message中的what标签
 	public static final int ONEACTIVITY_TAG = 0X23;
 	private Button test_button01, test_button02;
@@ -37,7 +35,7 @@ public class TestOneActivity extends BaseActivity implements OnClickListener {
 		test_button02 = (Button) findViewById(R.id.test_button02);
 		test_button02.setOnClickListener(this);
 		test_textview_new = (TextView) findViewById(R.id.test_textview_new);
-		handler.addKeyHandler(ONEACTIVITY_KEY,this);
+		handler.addKeyHandler(TestOneActivity.class,this);
 	}
 
 	@Override
@@ -52,7 +50,7 @@ public class TestOneActivity extends BaseActivity implements OnClickListener {
 			startActivity(new Intent(this, TestTwoActivity.class));
 			break;
 		case R.id.test_button02:
-			handler.putMessageKey(TestMainActivity.MAINACTIVITY_KEY, TestMainActivity.MAINACTIVITY_TAG_ONE, "TestOneActivity发送内容给TestMainActivity||第二个界面");
+			handler.putMessageKey(TestMainActivity.class, TestMainActivity.MAINACTIVITY_TAG_ONE, "TestOneActivity发送内容给TestMainActivity||第二个界面");
 			break;
 		}
 	}

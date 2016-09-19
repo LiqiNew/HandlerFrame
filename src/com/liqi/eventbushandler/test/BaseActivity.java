@@ -1,8 +1,8 @@
 package com.liqi.eventbushandler.test;
 
 
-import com.liqi.eventbushandler.base.BaseHandlerOperate;
-import com.liqi.eventbushandler.base.BaseHandlerUpDate;
+import com.liqi.eventbushandler.handler.BaseHandlerOperate;
+import com.liqi.eventbushandler.handler.BaseHandlerUpDate;
 
 import android.os.Bundle;
 import android.os.Message;

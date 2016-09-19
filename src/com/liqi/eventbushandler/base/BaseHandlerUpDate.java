@@ -1,4 +1,4 @@
-package com.liqi.eventbushandler.base;
+package com.liqi.eventbushandler.handler;
 
 import android.os.Message;
 

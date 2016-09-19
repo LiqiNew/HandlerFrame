@@ -1,4 +1,4 @@
-package com.liqi.eventbushandler.base;
+package com.liqi.eventbushandler.handler;
 
 import java.lang.ref.SoftReference;
 
@@ -16,6 +16,12 @@ public class BaseHandler extends Handler implements BaseHandlerMethod {
 	private static BaseHandler baseHandler;
 	private BaseHandlerGetKey baseHandlerGetKey;
 	private SparseArray<SoftReference<BaseHandlerUpDate>> arrayReference;
+	private FactoryOperateInterface factoryOperateInterface;
+
+	public void setFactoryOperateInterface(
+			FactoryOperateInterface factoryOperateInterface) {
+		this.factoryOperateInterface = factoryOperateInterface;
+	}
 
 	/**
 	 * 获取handler对象
@@ -23,7 +29,7 @@ public class BaseHandler extends Handler implements BaseHandlerMethod {
 	 * @param activity
 	 * @return
 	 */
-	public static BaseHandler getBaseHandler() {
+	public synchronized static BaseHandler getBaseHandler() {
 		synchronized (BaseHandler.class.getName()) {
 			if (baseHandler == null) {
 				baseHandler = new BaseHandler();
@@ -93,6 +99,9 @@ public class BaseHandler extends Handler implements BaseHandlerMethod {
 				if (null != reference) {
 					reference.clear();
 					arrayReference.remove(baseHandlerGetKey.handlerGetKey());
+					if (factoryOperateInterface != null) {
+						factoryOperateInterface.removeFactoryKeyData();
+					}
 				}
 			} else
 				System.out.println("removeKeyData>>>handler获取Key接口为空");
@@ -109,6 +118,9 @@ public class BaseHandler extends Handler implements BaseHandlerMethod {
 				arrayReference.valueAt(i).clear();
 			}
 			arrayReference.clear();
+			if (factoryOperateInterface != null) {
+				factoryOperateInterface.removeAllFactoryData();
+			}
 		}
 	}
 
