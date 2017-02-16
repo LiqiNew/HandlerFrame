@@ -37,7 +37,10 @@ public class TestTwoActivity extends BaseActivity implements OnClickListener {
 		case R.id.test_button01:
 			handler.putMessageKey(TestMainActivity.class,
 					TestMainActivity.MAINACTIVITY_TAG_TWO,
-					"第三个界面||TestTwoActivity发送内容给TestMainActivity");
+					"Test第三个界面||TestTwoActivity发送内容给TestMainActivity");
+			handler.putMessageKey(TestOneActivity.class,
+					TestOneActivity.ONEACTIVITY_TAG,
+					"Test第三个界面||TestTwoActivity发送内容给TestOneActivity||第二界面");
 			break;
 		case R.id.test_button02:
 			handler.putMessageKey(TestOneActivity.class,

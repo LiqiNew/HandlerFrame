@@ -1,5 +1,7 @@
 package com.liqi.eventbushandler.handler;
 
+import java.util.ArrayList;
+
 import com.liqi.eventbushandler.handler.BaseHandler.BaseHandlerGetKey;
 
 /**
@@ -11,7 +13,7 @@ import com.liqi.eventbushandler.handler.BaseHandler.BaseHandlerGetKey;
 public class BaseHandlerOperate implements BaseHandlerGetKey,
 		FactoryOperateInterface {
 	// 当前操作的对象class
-	protected Class<?> clazz;
+	protected ArrayList<Class<?>> clazzList;
 	private BaseHandlerMethod handler;
 	private static BaseHandlerOperate handlerOperate;
 	private BaseHandlerFactoryId factoryId;
@@ -34,6 +36,9 @@ public class BaseHandlerOperate implements BaseHandlerGetKey,
 		handler = BaseHandler.getBaseHandler();
 		handler.setBaseHandlerGetKey(this);
 		factoryId = BaseHandlerFactoryId.getBaseHandlerFactoryId();
+
+		if (null == clazzList)
+			clazzList = new ArrayList<Class<?>>();
 	}
 
 	/**
@@ -45,7 +50,7 @@ public class BaseHandlerOperate implements BaseHandlerGetKey,
 	public BaseHandlerOperate addKeyHandler(Class<?> clazz,
 			BaseHandlerUpDate handlerUpDate) {
 		if (null != clazz) {
-			this.clazz = clazz;
+			this.clazzList.add(clazz);
 			handler.addSparseArray(handlerUpDate);
 		}
 		return this;
@@ -63,7 +68,7 @@ public class BaseHandlerOperate implements BaseHandlerGetKey,
 	 */
 	public BaseHandlerOperate putMessageKey(Class<?> clazz, int tag, Object obj) {
 		if (null != clazz) {
-			this.clazz = clazz;
+			this.clazzList.add(clazz);
 			handler.putMessage(tag, obj);
 		}
 		return this;
@@ -77,7 +82,7 @@ public class BaseHandlerOperate implements BaseHandlerGetKey,
 	 */
 	public BaseHandlerOperate removeKeyData(Class<?> clazz) {
 		if (null != clazz) {
-			this.clazz = clazz;
+			this.clazzList.add(clazz);
 			handler.removeKeyData();
 		}
 		return this;
@@ -97,12 +102,28 @@ public class BaseHandlerOperate implements BaseHandlerGetKey,
 
 	@Override
 	public int handlerGetKey() {
-		return factoryId.getFactoryId(clazz);
+		int key = -1;
+		if (!clazzList.isEmpty()) {
+			// 取出对象存储集合的第一个，
+			Class<?> clazz = clazzList.get(0);
+			// 根据集合第一个数据产生取出对应的ID
+			key = factoryId.getFactoryId(clazz);
+			// 移除集合第一个对象
+			clazzList.remove(0);
+		}
+		return key;
 	}
 
 	@Override
 	public void removeFactoryKeyData() {
-		factoryId.removeKeyData(clazz);
+		if (!clazzList.isEmpty()) {
+			// 取出对象存储集合的第一个，
+			Class<?> clazz = clazzList.get(0);
+			// 移除对象对应的ID
+			factoryId.removeKeyData(clazz);
+			// 移除集合第一个对象
+			clazzList.remove(0);
+		}
 	}
 
 	@Override
