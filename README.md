@@ -20,7 +20,7 @@ allprojects {
 }
 ```
 
-**2：依赖PhotoFrame框架**<br>
+**2：依赖HandlerFrame框架**<br>
 
 ```gradle
 compile 'com.github.liqinew:handlerframe:v1.0.0'
