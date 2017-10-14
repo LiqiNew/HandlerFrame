@@ -48,6 +48,7 @@ BaseHandlerOperate.getBaseHandlerOperate()
 ```
 实现OnBaseHandlerUpDateListener接口去接受传输的Message。
 ```
+**如果觉得不错，请star给我动力。非常感谢**
 ### 如有问题，请查看我的博客文档
 [我的博客](http://www.jianshu.com/p/e9fbb99593cb) 
 
