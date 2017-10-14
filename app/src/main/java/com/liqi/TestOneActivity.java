@@ -34,6 +34,12 @@ public class TestOneActivity extends BaseActivity implements OnClickListener {
 		test_button02.setOnClickListener(this);
 		test_textview_new = (TextView) findViewById(R.id.test_textview_new);
 		handler.onSubscribe(TestOneActivity.class,this);
+		findViewById(R.id.test_button03).setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				handler.onSubscribe(TestOneActivity.class,TestOneActivity.this);
+			}
+		});
 	}
 
 	@Override

@@ -7,6 +7,7 @@ import android.os.Message;
 import android.support.v4.app.FragmentActivity;
 
 import com.liqi.handler.BaseHandlerOperate;
+import com.liqi.handler.OnBaseHandlerOperateListener;
 import com.liqi.handler.OnBaseHandlerUpDateListener;
 
 /**
@@ -17,7 +18,7 @@ import com.liqi.handler.OnBaseHandlerUpDateListener;
  */
 public abstract class BaseActivity extends FragmentActivity implements
 		OnBaseHandlerUpDateListener {
-	protected BaseHandlerOperate handler;
+	protected OnBaseHandlerOperateListener handler;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

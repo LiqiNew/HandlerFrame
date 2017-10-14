@@ -7,7 +7,7 @@ package com.liqi.handler;
  * @author Liqi
  * 
  */
-public interface OnBaseHandlerMethodListener {
+interface OnBaseHandlerMethodListener {
 	/**
 	 * 把传进来的对象通过塞入软引用添加进SparseArray集合里面
 	 * 
@@ -36,9 +36,9 @@ public interface OnBaseHandlerMethodListener {
 	/**
 	 * 赋值获取Key接口
 	 * 
-	 * @param baseHandlerGetKey
+	 * @param onBaseHandlerGetKeyListener
 	 */
-	void setBaseHandlerGetKey(BaseHandler.BaseHandlerGetKey baseHandlerGetKey);
+	void setOnBaseHandlerGetKeyListener(BaseHandler.OnBaseHandlerGetKeyListener onBaseHandlerGetKeyListener);
 
 	/**
 	 * 赋值移除订阅ID接口

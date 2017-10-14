@@ -22,11 +22,17 @@ public class TestTwoActivity extends BaseActivity implements OnClickListener {
 		test_button01.setOnClickListener(this);
 		test_button02 = (Button) findViewById(R.id.test_button02);
 		test_button02.setOnClickListener(this);
+		findViewById(R.id.test_button03).setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				handler.removeSubscribe(TestOneActivity.class);
+			}
+		});
 	}
 
 	@Override
 	protected void onDestroyData() {
-		handler.removeSubscribe(TestOneActivity.class);
+
 	}
 
 	@Override

@@ -6,7 +6,7 @@ package com.liqi.handler;
  * @author Liqi
  * 
  */
-public interface OnFactoryOperateListener {
+interface OnFactoryOperateListener {
 	/**
 	 * 把订阅ID从容器里面移除
 	 */

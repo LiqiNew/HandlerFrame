@@ -8,18 +8,18 @@ import java.util.Map;
  *
  * @author Liqi
  */
-public class BaseHandlerFactoryId {
+class BaseHandlerFactoryId {
     private static BaseHandlerFactoryId baseHandlerIdObj;
     // 初始化键ID值
     private int idIni = 0X8;
     // 工厂存储键ID值容器
-    private Hashtable<Class<?>, Integer> hIds;
+    private final Hashtable<Class<?>, Integer> hIds;
 
     private BaseHandlerFactoryId() {
-        hIds = null == hIds ? new Hashtable<Class<?>, Integer>() : hIds;
+        hIds =  new Hashtable<>();
     }
 
-    public synchronized static BaseHandlerFactoryId getBaseHandlerFactoryId() {
+    synchronized static BaseHandlerFactoryId getBaseHandlerFactoryId() {
         return baseHandlerIdObj = null == baseHandlerIdObj ? new BaseHandlerFactoryId()
                 : baseHandlerIdObj;
     }
@@ -29,7 +29,7 @@ public class BaseHandlerFactoryId {
      *
      * @param subscribeId 订阅ID
      */
-    public void removeSubscribeId(int subscribeId) {
+    void removeSubscribeId(int subscribeId) {
         Class<?> subscribeClass = null;
         if (!hIds.isEmpty()) {
             for (Map.Entry<Class<?>, Integer> entry : hIds.entrySet()) {
@@ -49,7 +49,7 @@ public class BaseHandlerFactoryId {
     /**
      * 移除容器里面所有的订阅ID
      */
-    public void removeAllSubscribeId() {
+    void removeAllSubscribeId() {
         hIds.clear();
     }
 
@@ -59,7 +59,7 @@ public class BaseHandlerFactoryId {
      * @param clazzKey 获取ID值的class
      * @return
      */
-    public int getFactoryId(Class<?> clazzKey) {
+    int getFactoryId(Class<?> clazzKey) {
         if (hIds.containsKey(clazzKey)) {
             return hIds.get(clazzKey);
         } else {
